@@ -1,9 +1,9 @@
 
 import { toFunction } from 'async-rule-evaluator'
 var facts = {
-  B:20,
-  A:10,
-  C:300,
+  // B:20,
+  // A:10,
+  // C:300,
     EXPS_EHR_STAT:'ANOTHER DOT',
     EXPS_EHR_VAL:'OK',
     RECORD_NAICS_NUM: '51113',
@@ -26,15 +26,23 @@ RCPT_VAL:5,
 }
 var tArr =
     [
-      `sum(A,B) == C+0`,
-      `A == B+0`, // treats the entire string as a single object
-      `A+B == C`,
-      // `A== B+0`,   
-      //  `A != undefined`,
-      //   // 1 ASYNC
-      //   `aggregate("RCPT_TOT","naics = '454390'", "sum")`,
-      //   //3
-      //   `substr(RECORD_NAICS_NUM,0,5)== "51113" and sum(RCPT_BOOK_PRNT_PCT,  RCPT_BOOK_ONLINE_PCT, RCPT_BOOK_OTH_PCT) ==0`,
+        //
+        `C`,
+        `A`, `B`,
+         `A== B `,   `A== B+0`,   `A== sum(B)`,  
+         `A != B`,
+         `A != B+0`,
+           `A >= B`,  `A >= B+0`, 
+      `A == B +C`,
+      // `sum(A,B) == C+0`,
+      `A >= B`, // treats the entire string as a single object
+      `A+B != C`,
+      
+       `A != undefined`,
+        // 1 ASYNC
+        `aggregate("RCPT_TOT","naics = '454390'", "sum")`,
+        //3
+        `substr(RECORD_NAICS_NUM,0,5)== "51113" and sum(RCPT_BOOK_PRNT_PCT,  RCPT_BOOK_ONLINE_PCT, RCPT_BOOK_OTH_PCT) ==0`,
 
     
       //   // //5  TYPE_CODE_STAT:"51113", RCPT_COMSN_GSV_VAL:2,RCPT_COMSN_EARN_VAL:3, RCPT_COMSN_AVG_RATE:4
@@ -91,8 +99,15 @@ async function runFilter(input, data) {
   
  tArr.map(async function(t, index){
     // if(index > 0) return;
-    let rF = await runFilter(t, facts)
-  console.log("🚀 ~ file: app.js:87 ~ rF", t, rF)
+
+    try {
+      let rF = await runFilter(t, facts)
+      console.log("🚀 ~ file: app.js:87 ~ rF", t, rF)
+    } catch (error) {
+      console.log("🚀 ~ file: app.js:106 ~ tArr.map ~ error:", error)
+      console.log("🚀 ~ file: app.js:87 ~ rF", t, false)
+    }
+ 
    
 })
 
