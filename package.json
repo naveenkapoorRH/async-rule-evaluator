@@ -1,0 +1,16 @@
+{
+  "name": "async-rule-evaluator",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async-rule-evaluator": "^1.7.0",
+    "filtrex": "^3.0.0"
+  }
+}
