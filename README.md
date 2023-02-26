@@ -11,6 +11,8 @@ Add conditions to app.js tARR
 var tArr =
     [
      `A == 3`,
+     `A == B`, // treats the entire string as a single object
+     `A== B+0`,
      `A == sum(B)`,
 
         // 1 ASYNC
